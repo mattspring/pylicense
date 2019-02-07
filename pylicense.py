@@ -1,5 +1,5 @@
 import os
-import xmlrpclib
+import xmlrpc.client
 
 
 class CondaLicenseDownloader(object):
@@ -32,7 +32,7 @@ class CondaLicenseDownloader(object):
 class PyLicense(object):
   def __init__(self, environment):
     self.environment = environment
-    self.client = xmlrpclib.ServerProxy('https://pypi.python.org/pypi')
+    self.client = xmlrpc.client.ServerProxy('https://pypi.python.org/pypi')
     if environment:
       self.conda_licenses = CondaLicenseDownloader.get_conda_licenses(environment)
 
@@ -155,7 +155,7 @@ if __name__ == '__main__':
 
   # must open file to rewrite it
   if args.stdout:
-    print "\n".join(output)
+    print("\n".join(output))
   else:
     with open(args.file, "w") as fh:
       fh.write("\n".join(output))
